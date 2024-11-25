@@ -10,6 +10,10 @@
     {
       "src": "/api/getProducts",
       "dest": "/api/getProducts.js"
+    },
+    {
+      "src": "/api/addProduct",
+      "dest": "/api/addProduct.js"
     }
   ]
 }
