@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 
     // Trả kết quả về dưới dạng JSON
     res.status(200).json({
-      success: true,
+      success: true, 
       data: result,
     });
   } catch (error) {
