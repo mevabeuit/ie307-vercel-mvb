@@ -26,6 +26,10 @@
     {
       "src": "/api/getRoleByUser",
       "dest": "/api/getRoleByUser.js"
+    },
+    {
+      "src": "/api/seedProducts",
+      "dest": "/api/seedProducts.js"
     }
   ]
 }
