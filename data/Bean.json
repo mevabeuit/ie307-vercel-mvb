@@ -4,8 +4,8 @@
     "name": "Robusta Beans",
     "description": "Hạt cà phê Robusta lớn hơn và có hình dạng tròn hơn so với các giống hạt cà phê khác. Những cây cà phê Robusta thường phát triển lớn hơn nhiều so với cây cà phê Arabica, chiều cao của chúng dao động từ 4,5 đến 6 mét. Hạt Robusta thường được coi là có khả năng chống chọi tốt hơn vì chúng có thể phát triển ở độ cao thấp và kháng bệnh tốt. Tuy nhiên, nghiên cứu gần đây cho thấy chúng không chịu nhiệt tốt như trước đây người ta vẫn nghĩ",
     "roasted": "Medium Roasted",
-    "imagelink_square":  "/assets/coffee_assets/robusta_coffee_beans/robusta_coffee_beans_square.png",
-    "imagelink_portrait":  "/assets/coffee_assets/robusta_coffee_beans/robusta_coffee_beans_portrait.png",
+    "imagelink_square":  "https://i.imgur.com/6XhgFB6.png",
+    "imagelink_portrait":  "https://i.imgur.com/9uBr1fe.png",
     "ingredients": "Africa",
     "special_ingredient": "From Africa",
     "prices": [
@@ -24,8 +24,8 @@
     "name": "Arabica Beans",
     "description": "Hạt cà phê Arabica là loại hạt cà phê phổ biến nhất, chiếm khoảng 60% lượng cà phê tiêu thụ trên toàn thế giới. Những hạt cà phê thơm ngon này có nguồn gốc từ nhiều thế kỷ trước tại các vùng cao nguyên của Ethiopia, và có thể là những hạt cà phê đầu tiên được con người tiêu thụ! Tên gọi Arabica có thể xuất phát từ sự phổ biến của chúng ở Ả Rập vào thế kỷ 7 (nay là Yemen).",
     "roasted": "Medium Roasted",
-    "imagelink_square":  "/assets/coffee_assets/arabica_coffee_beans/arabica_coffee_beans_square.png",
-    "imagelink_portrait":  "/assets/coffee_assets/arabica_coffee_beans/arabica_coffee_beans_portrait.png",
+    "imagelink_square":  "https://i.imgur.com/9DsugT4.png",
+    "imagelink_portrait":  "https://i.imgur.com/XYnSHFC.png",
     "ingredients": "Africa",
     "special_ingredient": "From Africa",
     "prices": [
@@ -44,8 +44,8 @@
     "name": "Liberica Beans",
     "description": "Cà phê Liberica có nguồn gốc từ Trung và Tây Phi – đặc biệt là Liberia, vì vậy tên của nó – được đánh giá cao nhờ vào hương hoa tinh tế và hương vị đậm đà, khói. Cây cà phê Liberica phát triển từ một cây lớn hơn nhiều so với Arabica hay Robusta, và phần lớn quả cà phê Liberica có hình dáng không đều và gần giống Robusta về kích thước cũng như hình thức chung. Loại cà phê này cũng có khả năng chịu nóng và khí hậu ẩm ướt tốt, và phát triển tốt ở độ cao thấp. ",
     "roasted": "Medium Roasted",
-    "imagelink_square":  "/assets/coffee_assets/liberica_coffee_beans/liberica_coffee_beans_square.png",
-    "imagelink_portrait":  "/assets/coffee_assets/liberica_coffee_beans/liberica_coffee_beans_portrait.png",
+    "imagelink_square":  "https://i.imgur.com/o3VI3kB.png",
+    "imagelink_portrait":  "https://i.imgur.com/plxAB62.png",
     "ingredients": "Malaysia",
     "special_ingredient": "From Malaysia",
     "prices": [
@@ -64,8 +64,8 @@
     "name": "Excelsa Beans",
     "description": "Hạt cà phê Excelsa hầu như chỉ được trồng ở Đông Nam Á, và chúng có hình dạng hơi giống hạt cà phê Liberica – hình oval dài. Những hạt cà phê này phát triển trên các cây cà phê lớn cao từ 20 đến 30 feet ở độ cao trung bình. Về hương vị, hạt cà phê Excelsa khá độc đáo. Chúng kết hợp các đặc tính của cà phê rang nhẹ như các nốt chua và hương vị trái cây với những hương vị giống như cà phê rang đậm.",
     "roasted": "Medium Roasted",
-    "imagelink_square":  "/assets/coffee_assets/excelsa_coffee_beans/excelsa_coffee_beans_square.png",
-    "imagelink_portrait":  "/assets/coffee_assets/excelsa_coffee_beans/excelsa_coffee_beans_portrait.png",
+    "imagelink_square":  "https://i.imgur.com/cc9WW6r.png",
+    "imagelink_portrait":  "https://i.imgur.com/gdmiajU.png",
     "ingredients": "Malaysia",
     "special_ingredient": "From Malaysia",
     "prices": [
