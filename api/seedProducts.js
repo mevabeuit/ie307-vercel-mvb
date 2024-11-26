@@ -50,12 +50,12 @@ export default async function handler(req, res) {
 
       // Xử lý ảnh local nếu đường dẫn bắt đầu với '../assets/' và tải lên Cloudinary
       if (imagelink_square_url && imagelink_square_url.startsWith('/assets/')) {
-        const imagePath = path.join(process.cwd(), imagelink_square_url);  // Đảm bảo đường dẫn chính xác
+        const imagePath = path.join(process.cwd(),'/public', imagelink_square_url);  // Đảm bảo đường dẫn chính xác
         imagelink_square_url = await uploadToCloudinary(imagePath);  // Tải ảnh lên Cloudinary
       }
 
       if (imagelink_portrait_url && imagelink_portrait_url.startsWith('/assets/')) {
-        const imagePath = path.join(process.cwd(), imagelink_portrait_url);  // Đảm bảo đường dẫn chính xác
+        const imagePath = path.join(process.cwd(),'/public', imagelink_portrait_url);  // Đảm bảo đường dẫn chính xác
         imagelink_portrait_url = await uploadToCloudinary(imagePath);  // Tải ảnh lên Cloudinary
       }
 
