@@ -18,6 +18,10 @@
     {
       "src": "/api/updateProduct",
       "dest": "/api/updateProduct.js"
+    },
+    {
+      "src": "/api/delProduct",
+      "dest": "/api/delProduct.js"
     }
   ]
 }
