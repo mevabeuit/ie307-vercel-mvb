@@ -1,11 +1,31 @@
-import {neon} from '@neondatabase/serverless';
+import { neon } from '@neondatabase/serverless';
 import path from 'path';
 import fs from 'fs';
+import cloudinary from 'cloudinary';
 
 const sql = neon(process.env.DATABASE_URL);
 
+// Cấu hình Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+// Hàm tải ảnh lên Cloudinary
+async function uploadToCloudinary(imagePath) {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(imagePath, (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result?.secure_url);  // Trả về URL của ảnh sau khi tải lên
+      }
+    });
+  });
+}
+
 export default async function handler(req, res) {
-  // Kiểm tra xem phương thức yêu cầu có phải là POST không
   if (req.method !== 'POST') {
     return res.status(405).json({
       success: false,
@@ -15,19 +35,31 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Đọc dữ liệu từ các file BeansData và CoffeeData
+    // Đọc dữ liệu từ các file JSON
     const beansDataPath = path.join(process.cwd(), 'data', 'Bean.json');
     const coffeeDataPath = path.join(process.cwd(), 'data', 'Coffee.json');
-
-    // Đọc dữ liệu từ các file JSON
+    
     const beansData = JSON.parse(fs.readFileSync(beansDataPath, 'utf8'));
     const coffeeData = JSON.parse(fs.readFileSync(coffeeDataPath, 'utf8'));
 
-    // Hợp nhất BeansData và CoffeeData
     const allProducts = [...beansData, ...coffeeData];
-    // Lặp qua từng sản phẩm trong allProducts (bao gồm cả BeansData và CoffeeData)
+
     for (const product of allProducts) {
-      // Chèn dữ liệu vào bảng products
+      let imagelink_square_url = product.imagelink_square;
+      let imagelink_portrait_url = product.imagelink_portrait;
+
+      // Xử lý ảnh local nếu đường dẫn bắt đầu với '../assets/' và tải lên Cloudinary
+      if (imagelink_square_url && imagelink_square_url.startsWith('/assets/')) {
+        const imagePath = path.join(process.cwd(), imagelink_square_url);  // Đảm bảo đường dẫn chính xác
+        imagelink_square_url = await uploadToCloudinary(imagePath);  // Tải ảnh lên Cloudinary
+      }
+
+      if (imagelink_portrait_url && imagelink_portrait_url.startsWith('/assets/')) {
+        const imagePath = path.join(process.cwd(), imagelink_portrait_url);  // Đảm bảo đường dẫn chính xác
+        imagelink_portrait_url = await uploadToCloudinary(imagePath);  // Tải ảnh lên Cloudinary
+      }
+
+      // Chèn dữ liệu vào cơ sở dữ liệu với các đường dẫn ảnh đã được thay thế bằng URL của Cloudinary
       await sql`
         INSERT INTO products (
           id, 
@@ -49,8 +81,8 @@ export default async function handler(req, res) {
           ${product.name}, 
           ${product.description}, 
           ${product.roasted}, 
-          ${product.imagelink_square}, 
-          ${product.imagelink_portrait}, 
+          ${imagelink_square_url}, 
+          ${imagelink_portrait_url}, 
           ${product.ingredients}, 
           ${product.special_ingredient}, 
           ${JSON.stringify(product.prices)}, 
