@@ -10,8 +10,8 @@ export default async function handler(req, res) {
       const result = await sql`
         SELECT state FROM states WHERE username = ${username} 
       `;
-      if (result.rows.length !== 0) {
-        res.status(200).json(result.rows[0].state);
+      if (result) {
+        res.status(200).json(result.state);
       } else {
         res.status(404).json({ error: 'State not found' });
       }
