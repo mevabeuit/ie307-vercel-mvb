@@ -5,13 +5,13 @@ const sql = neon(process.env.DATABASE_URL);
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { username, state } = req.body;
+    const { username, value } = req.body;
 
     try {
       const result = await sql`
         INSERT INTO states (username, state)
-        VALUES (${username}, ${state})
-        ON CONFLICT (username) DO UPDATE SET state = ${state}
+        VALUES (${username}, ${value})
+        ON CONFLICT (username) DO UPDATE SET state = ${value}
         RETURNING *
       `;
       res.status(200).json({ message: 'State saved successfully' });
