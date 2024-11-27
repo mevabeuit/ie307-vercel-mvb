@@ -10,8 +10,8 @@ export default async function handler(req, res) {
     try {
       const result = await sql`
         INSERT INTO states (username, state)
-        VALUES (${username}, ${JSON.stringify(state)})
-        ON CONFLICT (username) DO UPDATE SET state = ${JSON.stringify(state)}
+        VALUES (${username}, ${state}})
+        ON CONFLICT (username) DO UPDATE SET state = ${state}
         RETURNING *
       `;
       res.status(200).json({ message: 'State saved successfully' });
