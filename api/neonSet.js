@@ -4,26 +4,22 @@ import { neon } from '@neondatabase/serverless';
 const sql = neon(process.env.DATABASE_URL);
 
 export default async function handler(req, res) {
-  try {
-    if (req.method === 'POST') {
-      const { id, value } = req.body;
+  if (req.method === 'POST') {
+    const { username, state } = req.body;
 
-      if (!id || !value) {
-        return res.status(400).json({ error: 'id and value are required' });
-      }
-
+    try {
       const result = await sql`
-        INSERT INTO states (id, value)
-        VALUES (${id}, ${value})
-        ON CONFLICT (id) DO UPDATE SET value = ${value}
+        INSERT INTO states (username, state)
+        VALUES (${username}, ${JSON.stringify(state)})
+        ON CONFLICT (username) DO UPDATE SET value = ${JSON.stringify(state)}
         RETURNING *
       `;
-
-      res.status(200).json({ id, value: result[0].value });
-    } else {
-      res.status(405).json({ error: 'Method not allowed' });
+      res.status(200).json({ message: 'State saved successfully' });
+    } catch (error) {
+      console.error('Error saving state:', error);
+      res.status(500).json({ error: 'Failed to save state' });
     }
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
+  } else {
+    res.status(405).json({ error: 'Method Not Allowed' });
   }
 }
