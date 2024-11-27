@@ -1,12 +1,14 @@
 import { neon } from '@neondatabase/serverless';
+import redis from 'redis';
 
 const sql = neon(process.env.DATABASE_URL);
+const redisClient = redis.createClient({ url: process.env.REDIS_URL });
+
+redisClient.connect();
 
 export default async function handler(req, res) {
-  // Chỉ xử lý yêu cầu PUT
   if (req.method === 'PUT') {
     try {
-      // Lấy dữ liệu từ payload (req.body)
       const {
         id,
         name,
@@ -20,7 +22,6 @@ export default async function handler(req, res) {
         type,
       } = req.body;
 
-      // Kiểm tra xem ID có được cung cấp hay không
       if (!id) {
         return res.status(400).json({
           success: false,
@@ -28,7 +29,6 @@ export default async function handler(req, res) {
         });
       }
 
-      // Thực hiện câu lệnh UPDATE trong bảng `products`
       const result = await sql`
         UPDATE products
         SET
@@ -45,7 +45,6 @@ export default async function handler(req, res) {
         RETURNING *;
       `;
 
-      // Kiểm tra xem sản phẩm có tồn tại không
       if (result.length === 0) {
         return res.status(404).json({
           success: false,
@@ -53,7 +52,9 @@ export default async function handler(req, res) {
         });
       }
 
-      // Trả về dữ liệu sản phẩm đã được cập nhật
+      // Xóa cache khi cập nhật sản phẩm
+      await redisClient.del('products_cache');
+
       res.status(200).json({
         success: true,
         message: 'Product updated successfully',
@@ -61,8 +62,6 @@ export default async function handler(req, res) {
       });
     } catch (error) {
       console.error('Error updating product:', error);
-
-      // Xử lý lỗi
       res.status(500).json({
         success: false,
         error: 'Internal Server Error',
@@ -70,7 +69,6 @@ export default async function handler(req, res) {
       });
     }
   } else {
-    // Phản hồi khi phương thức không phải PUT
     res.status(405).json({ error: 'Method Not Allowed' });
   }
 }
