@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
     try {
       const result = await sql`
-        SELECT value FROM states WHERE username = ${username} 
+        SELECT state FROM states WHERE username = ${username} 
       `;
       if (result.rows.length !== 0) {
         res.status(200).json(result.rows[0].state);
