@@ -30,6 +30,18 @@
     {
       "src": "/api/seedProducts",
       "dest": "/api/seedProducts.js"
+    },
+    {
+      "src": "/api/neonGet",
+      "dest": "/api/neonGet.js"
+    },
+    {
+      "src": "/api/neonSet",
+      "dest": "/api/neonSet.js"
+    },
+    {
+      "src": "/api/neonDel",
+      "dest": "/api/neonDel.js"
     }
   ]
 }
