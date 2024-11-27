@@ -1,10 +1,7 @@
 import { neon } from '@neondatabase/serverless';
-import redis from 'redis';
+import redisClient from "../utils/redisClient.js";
 
 const sql = neon(process.env.DATABASE_URL);
-const redisClient = redis.createClient({ url: process.env.REDIS_URL });
-
-redisClient.connect();
 
 export default async function handler(req, res) {
   if (req.method === 'PUT') {
