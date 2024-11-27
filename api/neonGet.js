@@ -11,7 +11,7 @@ export default async function handler(req, res) {
         SELECT state FROM states WHERE username = ${username} 
       `;
       if (result) {
-        res.status(200).json(result.state);
+        res.status(200).json(result);
       } else {
         res.status(404).json({ error: 'State not found' });
       }
